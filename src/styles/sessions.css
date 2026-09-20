@@ -1,0 +1,55 @@
+.session-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.field--inline { margin-bottom: 0; min-width: 200px; }
+
+.session-toolbar__total {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.session-list { display: flex; flex-direction: column; }
+
+.session-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.session-row:last-child { border-bottom: none; }
+
+.session-row__body { flex: 1; min-width: 0; }
+
+.session-row__title { font-weight: 600; font-size: 0.94rem; }
+
+.session-row__meta { color: var(--text-muted); font-size: 0.82rem; }
+
+.session-row__notes {
+  color: var(--text-faint);
+  font-size: 0.82rem;
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+.session-row__duration {
+  font-weight: 650;
+  font-size: 0.88rem;
+  color: var(--primary-700);
+  background: var(--primary-050);
+  border-radius: var(--radius-pill);
+  padding: 4px var(--space-3);
+  flex: none;
+}
+
+@media (max-width: 620px) {
+  .session-toolbar__total { margin-left: 0; }
+  .session-row__meta { font-size: 0.78rem; }
+  .session-row__duration { display: none; }
+}

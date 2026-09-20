@@ -1,0 +1,37 @@
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.progress-grid__wide { grid-column: 1 / -1; }
+
+.weekly-list,
+.distribution-list { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.weekly-list__head,
+.distribution-list__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: 6px;
+  font-size: 0.86rem;
+}
+
+.weekly-list__head strong { margin-left: auto; }
+.distribution-list__value { margin-left: auto; color: var(--text-muted); font-size: 0.8rem; }
+
+.statistic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.statistic dt { color: var(--text-muted); font-size: 0.8rem; }
+.statistic dd { margin: 2px 0 0; font-size: 1.05rem; font-weight: 650; }
+
+@media (max-width: 960px) {
+  .progress-grid { grid-template-columns: minmax(0, 1fr); }
+}

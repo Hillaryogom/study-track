@@ -1,0 +1,81 @@
+/* Sign-in experience: an illustrative navy panel beside a single focused form. */
+
+.auth {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(340px, 44%) 1fr;
+}
+
+.auth__panel {
+  background: linear-gradient(160deg, var(--navy-800) 0%, var(--navy-600) 100%);
+  color: var(--text-invert);
+  padding: var(--space-7) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.auth__panel .brand,
+.auth__panel .brand__word { color: var(--text-invert); }
+
+.auth__panel-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 18ch;
+  margin-top: var(--space-5);
+}
+
+.auth__highlights { display: flex; flex-direction: column; gap: var(--space-4); max-width: 42ch; }
+
+.auth__highlights li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.94rem;
+}
+
+.auth__highlights svg { flex: none; margin-top: 2px; color: #9fb4ff; }
+
+.auth__form-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-5);
+  background: var(--page);
+}
+
+.auth__card {
+  width: min(420px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-6);
+}
+
+.auth__mobile-brand { display: none; margin-bottom: var(--space-5); }
+
+.auth__subtitle { color: var(--text-muted); font-size: 0.92rem; margin: var(--space-2) 0 var(--space-5); }
+
+.auth__footer {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.auth__inline-link { font-size: 0.82rem; align-self: flex-start; }
+
+.auth form .alert { margin-bottom: var(--space-4); }
+
+@media (max-width: 860px) {
+  .auth { grid-template-columns: 1fr; }
+  .auth__panel { display: none; }
+  .auth__mobile-brand { display: block; }
+  .auth__card { border: none; box-shadow: none; background: transparent; padding: var(--space-4) 0; }
+  .auth__form-area { align-items: flex-start; padding-top: var(--space-6); }
+}

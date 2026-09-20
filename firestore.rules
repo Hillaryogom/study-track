@@ -1,0 +1,90 @@
+rules_version = '2';
+
+// StudyTrack access model: a signed-in student can only read and write records
+// that carry their own uid in `ownerId`, and ownership can never be transferred.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function owns(resourceData) {
+      return signedIn() && resourceData.ownerId == request.auth.uid;
+    }
+
+    function ownershipUnchanged() {
+      return request.resource.data.ownerId == resource.data.ownerId;
+    }
+
+    function hasTimestamps() {
+      return request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+    }
+
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    match /subjects/{subjectId} {
+      function validSubject() {
+        return request.resource.data.name is string
+          && request.resource.data.name.size() >= 2
+          && request.resource.data.name.size() <= 60
+          && request.resource.data.colour is string
+          && request.resource.data.description is string
+          && request.resource.data.description.size() <= 280
+          && (request.resource.data.targetHours == null
+              || (request.resource.data.targetHours is number
+                  && request.resource.data.targetHours > 0
+                  && request.resource.data.targetHours <= 1000));
+      }
+
+      allow read, delete: if owns(resource.data);
+      allow create: if owns(request.resource.data) && validSubject() && hasTimestamps();
+      allow update: if owns(resource.data) && ownershipUnchanged() && validSubject();
+    }
+
+    match /studySessions/{sessionId} {
+      function validSession() {
+        return request.resource.data.subjectId is string
+          && request.resource.data.studyDate is string
+          && request.resource.data.studyDate.matches('^\\d{4}-\\d{2}-\\d{2}$')
+          && request.resource.data.durationMinutes is int
+          && request.resource.data.durationMinutes > 0
+          && request.resource.data.durationMinutes <= 1440
+          && request.resource.data.notes is string
+          && request.resource.data.notes.size() <= 500;
+      }
+
+      allow read, delete: if owns(resource.data);
+      allow create: if owns(request.resource.data) && validSession() && hasTimestamps();
+      allow update: if owns(resource.data) && ownershipUnchanged() && validSession();
+    }
+
+    match /goals/{goalId} {
+      function validGoal() {
+        return request.resource.data.title is string
+          && request.resource.data.title.size() >= 2
+          && request.resource.data.title.size() <= 80
+          && request.resource.data.period in ['daily', 'weekly']
+          && request.resource.data.targetMinutes is int
+          && request.resource.data.targetMinutes > 0
+          && request.resource.data.targetMinutes <= 10080
+          && request.resource.data.startDate is string
+          && request.resource.data.endDate is string
+          && request.resource.data.endDate >= request.resource.data.startDate
+          && (request.resource.data.subjectId == null || request.resource.data.subjectId is string);
+      }
+
+      allow read, delete: if owns(resource.data);
+      allow create: if owns(request.resource.data) && validGoal() && hasTimestamps();
+      allow update: if owns(resource.data) && ownershipUnchanged() && validGoal();
+    }
+
+    // Anything not described above is denied.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

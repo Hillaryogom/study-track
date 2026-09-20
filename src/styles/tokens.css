@@ -1,0 +1,60 @@
+/* Design tokens taken from the StudyTrack visual reference: a deep navy rail,
+   a blue primary action colour, white cards and a pale neutral page. */
+:root {
+  --navy-900: #0b1330;
+  --navy-800: #101b3f;
+  --navy-700: #1a2752;
+  --navy-600: #24346a;
+
+  --primary-700: #2242c4;
+  --primary-600: #3157e8;
+  --primary-500: #4a6cf1;
+  --primary-100: #e3e9fd;
+  --primary-050: #f0f4ff;
+
+  --page: #f5f7fb;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --border: #e3e8f0;
+  --border-strong: #cbd5e1;
+
+  --text: #16203a;
+  --text-muted: #5b6784;
+  --text-faint: #8794ad;
+  --text-invert: #ffffff;
+
+  --success: #18a874;
+  --success-soft: #e4f7ef;
+  --warning: #f6a723;
+  --warning-soft: #fdf3e0;
+  --danger: #e5484d;
+  --danger-soft: #fdeaea;
+
+  --subject-blue: #3157e8;
+  --subject-green: #18a874;
+  --subject-purple: #8b5cf6;
+  --subject-amber: #f6a723;
+  --subject-red: #ef5350;
+  --subject-slate: #94a3b8;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --shadow-sm: 0 1px 2px rgba(16, 27, 63, 0.06);
+  --shadow-md: 0 4px 16px rgba(16, 27, 63, 0.08);
+  --shadow-lg: 0 18px 48px rgba(11, 19, 48, 0.22);
+
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --sidebar-width: 244px;
+  --header-height: 64px;
+}
